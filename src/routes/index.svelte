@@ -3,9 +3,7 @@
 </svelte:head>
 
 <script>
-	function transition_random() {
-		location.href = "/random"
-	}
+	import { update_rands } from '../store'
 </script>
 
 <div>
@@ -14,7 +12,7 @@
 	<br>
 	<p>↓とりあえず押してみそ</p>
 	<label>
-		<a on:click="{transition_random}"class="button button-red">RANDOM</a>
+		<a on:click="{update_rands}" href="/random" class="button button-red">RANDOM</a>
 	</label>
 	<br>
 	<br>

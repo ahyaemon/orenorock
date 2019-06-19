@@ -21,6 +21,6 @@
 {#each music_ids as music_id (music_id)}
     <hr>
     <div style="margin: 0 0 30px 0">
-        <MusicSummaryItem {music_id} />
+        <MusicSummaryItem {music_id} has_link="{true}"/>
     </div>
 {/each}
