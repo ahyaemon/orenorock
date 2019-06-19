@@ -4,8 +4,10 @@ import commonjs from 'rollup-plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
 import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
+import json from 'rollup-plugin-json';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+import typescript from 'rollup-plugin-typescript';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -18,6 +20,7 @@ export default {
 		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
+			typescript({module: 'CommonJS'}),
 			replace({
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -30,7 +33,9 @@ export default {
 			resolve({
 				browser: true
 			}),
-			commonjs(),
+			commonjs({
+				extensions: ['.js', '.ts'],
+			}),
 
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
@@ -51,7 +56,11 @@ export default {
 
 			!dev && terser({
 				module: true
-			})
+			}),
+
+			json({
+				include: 'static/data.json'
+			}),
 		],
 
 		onwarn,
@@ -61,6 +70,7 @@ export default {
 		input: config.server.input(),
 		output: config.server.output(),
 		plugins: [
+			typescript({module: 'CommonJS'}),
 			replace({
 				'process.browser': false,
 				'process.env.NODE_ENV': JSON.stringify(mode)
@@ -70,7 +80,12 @@ export default {
 				dev
 			}),
 			resolve(),
-			commonjs()
+			commonjs({
+				extensions: ['.js', '.ts'],
+			}),
+			json({
+				include: 'static/data.json'
+			}),
 		],
 		external: Object.keys(pkg.dependencies).concat(
 			require('module').builtinModules || Object.keys(process.binding('natives'))

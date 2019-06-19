@@ -2,12 +2,27 @@
 	import Drawer from '../components/drawer.svelte'
 </script>
 
-<div style="display: flex;">
-	<div style="order: 1;">
+<style>
+	.parent {
+		display: flex;
+		width: auto;
+	}
+
+	.drawer {
+		order: 1;
+	}
+
+	.main {
+		order: 2;
+		width: 100%;
+	}
+</style>
+
+<div class="parent">
+	<div class="drawer">
 		<Drawer/>
 	</div>
-	<main style="order: 2;">
+	<main class="main">
 		<slot></slot>
 	</main>
 </div>
-
