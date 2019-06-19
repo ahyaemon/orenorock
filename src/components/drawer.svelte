@@ -1,9 +1,14 @@
 <script>
     import GyouFactory from '../domain/vo/moji/gyou_factory'
+    import { get } from 'svelte/store'
+    import { artists, update_rands } from '../store'
     let gyous = GyouFactory.default();
 
-    function transition_random() {
-        location.href = "/random"
+    function has_data(hiragana) {
+        const artist = get(artists).find((a) => {
+            return a.headHiragana.jp === hiragana.jp
+        });
+        return artist !== undefined
     }
 </script>
 
@@ -21,19 +26,9 @@
         border-bottom: 1px solid #e5e5e5;
     }
 
-    #title a {
-        text-decoration: none;
-        color: black;
-    }
-
-    button {
-        border: none;
-        border-radius: 2px;
-        background-color: rgba(255, 3, 0, 0.71);
-        color: white;
-        box-shadow: 1px 1px 1px grey;
+    .button {
+        display: inline-block;
         width: 90%;
-        padding: 6px;
         margin: 20px 0 0 0;
     }
 
@@ -55,14 +50,19 @@
         <a href="/"><h4>俺のロックまとめ</h4></a>
     </div>
     <div>
-        <button on:click={transition_random}>RANDOM</button>
-        <a href="/random"></a>
+        <label>
+            <a href="/random" on:click="{update_rands}"class="button button-red">RANDOM</a>
+        </label>
     </div>
     <div class="gyous">
         {#each gyous as gyou}
             <div class="row">
                 {#each gyou.hiraganas as hiragana}
-                    <span class="hiragana">{hiragana.jp}</span>
+                    <label>
+                        <a href="{'/artists/' + hiragana.c + hiragana.v}">
+                            <span class="hiragana" class:b="{has_data(hiragana)}">{hiragana.jp}</span>
+                        </a>
+                    </label>
                 {/each}
             </div>
         {/each}
