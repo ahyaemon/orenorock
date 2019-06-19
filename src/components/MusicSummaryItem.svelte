@@ -29,7 +29,7 @@
     {#if has_link}
         <div style="margin: 10px;">
             <label>
-                <a class="button button-green" href="{'/artist/' + music_summary.artistName}">他の動画も見る</a>
+                <a class="button button-green" href="{'/artist/' + encodeURI(music_summary.artistName)}">他の動画も見る</a>
             </label>
         </div>
     {/if}
