@@ -38,7 +38,7 @@ a {
 	border: none;
 	border-radius: 2px;
 	padding: 10px;
-	box-shadow: 1px 1px 1px grey;
+	box-shadow: 2px 2px 4px grey;
 }
 
 .button-green {
@@ -53,4 +53,9 @@ a {
 
 hr {
 	border-top: 1px solid #e5e5e5;
+	margin: 0 20px;
+}
+
+.inline-block {
+	display: inline-block;
 }

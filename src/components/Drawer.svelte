@@ -2,6 +2,7 @@
     import GyouFactory from '../domain/vo/moji/gyou_factory'
     import { get } from 'svelte/store'
     import { artists, update_rands } from '../store'
+
     let gyous = GyouFactory.default();
 
     function has_data(hiragana) {
@@ -14,9 +15,9 @@
 
 <style>
     nav {
-        height: 100vh;
         border-right: 1px solid #e5e5e5;
         width: 300px;
+        height: 100%;
 
         text-align: center;
     }
