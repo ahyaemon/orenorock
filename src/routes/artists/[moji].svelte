@@ -17,6 +17,11 @@
              .map(artist => artist.musics[0].id)
 </script>
 
+<svelte:head>
+    <title>{hiragana.jp} | 俺のロックまとめ</title>
+    <meta name='description' content='{hiragana.jp}から始まるアーティストの動画'>
+</svelte:head>
+
 <h1>{hiragana.jp}</h1>
 {#each music_ids as music_id (music_id)}
     <hr>

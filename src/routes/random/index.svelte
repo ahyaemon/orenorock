@@ -5,6 +5,11 @@
     import MusicSummaryItem from '../../components/MusicSummaryItem.svelte'
 </script>
 
+<svelte:head>
+    <title>RANDOM | 俺のロックまとめ</title>
+    <meta name='description' content='独断と偏見で集めたロックの動画紹介をランダムで3つ表示'>
+</svelte:head>
+
 <h2>RANDOM</h2>
 
 <!-- これが無いと rands の update が 下のループに反映されない -->

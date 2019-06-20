@@ -21,6 +21,11 @@
     }
 </style>
 
+<svelte:head>
+    <title>{name} | 俺のロックまとめ</title>
+    <meta name='description' content='{name}の動画まとめ'>
+</svelte:head>
+
 <h1>{artist.name}</h1>
 {#if artist.url}
     <p>

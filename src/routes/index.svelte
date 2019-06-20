@@ -1,5 +1,6 @@
 <svelte:head>
 	<title>俺のロックまとめ</title>
+	<meta name='description' content='独断と偏見で集めたロックの動画紹介'>
 </svelte:head>
 
 <script>
