@@ -94,3 +94,6 @@
 		</div>
 	{/if}
 </div>
+
+<!-- TODO ナモバイル判定でビが無いから各アーティストページが出ない？？-->
+<a class="none" href="/links">links</a>
