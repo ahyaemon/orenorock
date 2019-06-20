@@ -2,6 +2,8 @@
     import GyouFactory from '../domain/vo/moji/gyou_factory'
     import { get } from 'svelte/store'
     import { artists, update_rands } from '../store'
+    import { createEventDispatcher } from 'svelte'
+    import { mobile_breakpoint } from '../const'
 
     let gyous = GyouFactory.default();
 
@@ -11,13 +13,20 @@
         });
         return artist !== undefined
     }
+
+    const dispatch = createEventDispatcher();
+    function emit_change_page() {
+        return dispatch('change_page', null)
+    }
+
+    let width;
 </script>
 
 <style>
     nav {
+        height: 100vh;
         border-right: 1px solid #e5e5e5;
         width: 300px;
-        height: 100%;
 
         text-align: center;
     }
@@ -46,21 +55,25 @@
     }
 </style>
 
+<svelte:window bind:innerWidth="{width}"/>
+
 <nav>
     <div id="title">
-        <a href="/"><h4>俺のロックまとめ</h4></a>
+        <a href="/" on:click="{emit_change_page}"><h4>俺のロックまとめ</h4></a>
     </div>
-    <div>
-        <label>
-            <a href="/random" on:click="{update_rands}"class="button button-red">RANDOM</a>
-        </label>
-    </div>
+    {#if width > mobile_breakpoint}
+        <div>
+            <label>
+                <a href="/random" on:click="{update_rands}"class="button button-red">RANDOM</a>
+            </label>
+        </div>
+    {/if}
     <div class="gyous">
         {#each gyous as gyou}
             <div class="row">
                 {#each gyou.hiraganas as hiragana}
                     <label>
-                        <a href="{'/artists/' + hiragana.c + hiragana.v}">
+                        <a href="{'/artists/' + hiragana.c + hiragana.v}" on:click="{emit_change_page}">
                             <span class="hiragana" class:b="{has_data(hiragana)}">{hiragana.jp}</span>
                         </a>
                     </label>
